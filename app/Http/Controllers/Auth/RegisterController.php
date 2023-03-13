@@ -54,8 +54,40 @@ class RegisterController extends Controller
             'apellido' => ['required', 'string', 'max:255'],
             'username'=>['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'telefono'=>['required', 'numeric', 'unique:users', 'min:10', 'max:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+
+        ],
+        [
+            'nombre.required'=>'El campo No puede estar vacio',
+            'apellido.required'=>'El campo No puede estar vacio',
+            'username.required'=>'El campo No puede estar vacio',
+            'email.required'=>'El campo No puede estar vacio',
+            'password.required'=>'El campo No puede estar vacio',
+            'telefono.required'=>'La El campo No puede estar vacio',
+            'password.required'=>'La El campo No puede estar vacio',
+
+
+            'username.unique'=>'El nombre de usuario ya existe',
+            'email.unique'=>'El correo ya existe',
+            'telefono.unique'=>'El telefono ya existe',
+
+
+            'password.confirmed'=>'Las contraseñas no coinciden',
+            'telefono.numeric' => 'El telefono debe ser de tipo numerico',
+
+            'password.min'=>'La contraseña debe tener minimo 8 caracteres',
+            'telefono.min'=>'La numero debe tener minimo 10 caracteres',
+            'telefono.max'=>'La numero debe tener maximo 10 caracteres',
+
+
+
+
+
+
+        ]
+    
+    );
     }
 
     /**
