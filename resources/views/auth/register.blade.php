@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Registro de Usuarios') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -71,9 +71,23 @@
                             <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Numero de telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" type="tel" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autofocus>
+                                <input id="telefono" type="tel" min="9" max="11" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autofocus>
 
                                 @error('telefono')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="img" class="col-md-4 col-form-label text-md-end">{{ __('Foto de perfil') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="img" type="file"  class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}" required autofocus>
+
+                                @error('img')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -54,7 +56,7 @@ class RegisterController extends Controller
             'apellido' => ['required', 'string', 'max:255'],
             'username'=>['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'telefono'=>['required', 'numeric', 'unique:users', 'min:10', 'max:10'],
+            'telefono'=>['required', 'numeric', 'unique:users', 'min:999999999', 'max:9999999999'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 
         ],
@@ -83,27 +85,37 @@ class RegisterController extends Controller
 
 
 
-
-
         ]
     
     );
     }
 
+
+    
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data, $filename)
     {
         return User::create([
             'nombre' => $data['nombre'],
             'apellido' => $data['apellido'],
             'email' => $data['email'],
+            'telefono' => $data['telefono'],
+            'img'=>$filename,
+            'rol'=>$data['rol'],
+            'id_empresa'=>$data['id_empresa'],
+            'id_area'=>$data['id_area'],
+            'id_grupo'=>$data['id_grupo'],
+            'f_cumple'=>$data['f_cumple'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'status'=>"Desconectado",
+            
+            
         ]);
     }
 }
